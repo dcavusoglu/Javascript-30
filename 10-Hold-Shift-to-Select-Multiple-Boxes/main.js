@@ -1,6 +1,8 @@
 const checkboxes = document.querySelectorAll('.input');
-checkboxes.addEventListener('click', changeStatus);
+checkboxes.forEach(checkbox => checkbox.addEventListener('click', changeStatus));
 
+let lastChecked;
 function changeStatus(e) {
+
   console.log(e);
 }
