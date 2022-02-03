@@ -6,7 +6,7 @@ const playBtn = player.querySelector('.toggle');
 const skipBtns = player.querySelectorAll('[data-skip]');
 const adjustmentBtns = player.querySelectorAll('.player__slider');
 const fullscreenBtn = player.querySelector('.goFull');
-const fullScreen = document.querySelector(':fullscreen');
+
 
 function videoStatus() {
   // if(video.paused) {
