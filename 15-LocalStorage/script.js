@@ -1,6 +1,6 @@
 const addItems = document.querySelector('.add-items');
 const itemsList = document.querySelector('.plates');
-const items = [];
+const items = JSON.parse(localStorage.getItem("items")) || [];
 
 
 function addItem(e) {
@@ -14,8 +14,9 @@ function addItem(e) {
   items.push(newItem);
   console.log(newItem);
   console.log(items);
-  this.reset();
   displayItems(items,itemsList);
+  localStorage.setItem("items", JSON.stringify(items));
+  this.reset();
 
 }
 
@@ -30,5 +31,19 @@ function displayItems(items, itemsList) {
   }).join('');
 }
 
+function toggleCheck(e) {
+
+  // two things show up in the console, see what they are
+  // checkbox and input
+  if (!e.target.matches('input')) return;
+  const clicked = e.target;
+  const index = clicked.dataset.index;
+  items[index].done = !items[index].done
+  localStorage.setItem("items", JSON.stringify(items));
+  displayItems(items, itemsList);
+}
+
 addItems.addEventListener('submit', addItem);
-// addItems.addEventListener('submit', displayItems);
+itemsList.addEventListener('click', toggleCheck);
+
+displayItems(items, itemsList);
