@@ -5,6 +5,8 @@ const scoreBoard = document.querySelector('.score');
 let lastHole;
 let timeUp = false;
 let score = 0;
+// let clicked = false;
+let clicked = 0;
 
 function randTime(min, max) {
   return Math.round(Math.random() * (max-min) + min);
@@ -21,7 +23,6 @@ function randHole(holes) {
     console.log('The same hole');
     return randHole(holes);
   }
-
   lastHole = hole;
   return hole;
 }
@@ -43,15 +44,19 @@ function startGame () {
   score = 0;
   popUp();
   setTimeout(() =>
-    timeUp = true, 10000);
+  timeUp = true, 10000);
 }
 
 function bam(e) {
-console.log(e);
-if(!e.isTrusted) return;
-score++;
-this.classList.remove('up');
-scoreBoard.textContent = score;
+  console.log(e);
+  if(!e.isTrusted) return;
+ clicked = 0;
+  this.parentNode.classList.remove('up');
+ clicked++;
+ clicked > 0 ? score++ : score;
+  scoreBoard.textContent = score;
+  console.log('clicked:', clicked);
+  console.log('score:', score);
 }
 
 moles.forEach(mole => mole.addEventListener('click', bam));
